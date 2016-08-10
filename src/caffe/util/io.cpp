@@ -74,7 +74,7 @@ cv::Mat ReadImageToCVMat(const string& filename,
     const int height, const int width, const bool is_color) {
   cv::Mat cv_img;
   int cv_read_flag = (is_color ? CV_LOAD_IMAGE_COLOR :
-    CV_LOAD_IMAGE_GRAYSCALE);
+    CV_LOAD_IMAGE_GRAYSCALE) | CV_LOAD_IMAGE_ANYDEPTH;
   cv::Mat cv_img_origin = cv::imread(filename, cv_read_flag);
   if (!cv_img_origin.data) {
     LOG(ERROR) << "Could not open or find file " << filename;
@@ -210,7 +210,7 @@ bool DecodeDatum(Datum* datum, bool is_color) {
 }
 
 void CVMatToDatum(const cv::Mat& cv_img, Datum* datum) {
-  CHECK(cv_img.depth() == CV_8U) << "Image data type must be unsigned byte";
+  //CHECK(cv_img.depth() == CV_8U) << "Image data type must be unsigned byte";
   datum->set_channels(cv_img.channels());
   datum->set_height(cv_img.rows);
   datum->set_width(cv_img.cols);

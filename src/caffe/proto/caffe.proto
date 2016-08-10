@@ -398,6 +398,7 @@ message LayerParameter {
   optional SigmoidParameter sigmoid_param = 124;
   optional SoftmaxParameter softmax_param = 125;
   optional SPPParameter spp_param = 132;
+  optional SSIMLossParameter ssim_loss_param = 147;
   optional SliceParameter slice_param = 126;
   optional TanHParameter tanh_param = 127;
   optional ThresholdParameter threshold_param = 128;
@@ -1101,6 +1102,14 @@ message SigmoidParameter {
     CUDNN = 2;
   }
   optional Engine engine = 1 [default = DEFAULT];
+}
+
+
+message SSIMLossParameter {
+  optional uint32 kernel_size = 1 [default = 8]; // The kernel size (square)
+  optional uint32 stride = 2 [default = 8]; // The stride (equal in Y, X)
+  optional float  c1 = 3 [default = 0.00001]; // C1 
+  optional float  c2 = 4 [default = 0.00001]; // C2
 }
 
 message SliceParameter {
